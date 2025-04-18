@@ -1,1 +1,5 @@
 /target/
+/test-output/
+/logs/
+/index.html
+/dashboard.html
