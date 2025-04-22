@@ -150,50 +150,27 @@ public abstract class BrowserUtility {
 		
 	}
 	
+
 	public String takeScreenShot(String name) {
-	    // Create screenshots directory if it doesn't exist
-	    File screenshotDir = new File("screenshots");
-	    if (!screenshotDir.exists()) {
-	        screenshotDir.mkdirs();
-	    }
-	    
-	    // Get current timestamp
-	    String timeStamp = new SimpleDateFormat("HH-mm-ss").format(new Date());
-	    
-	    // Create screenshot file path
-	    String path = "screenshots/" + name + " - " + timeStamp + ".png";
-	    File screenshotFile = new File(path);
-	    
-	    try {
-	        // Take screenshot
-	        TakesScreenshot screenshot = (TakesScreenshot) driver;
-	        File screenshotData = screenshot.getScreenshotAs(OutputType.FILE);
-	        
-	        // Copy screenshot to file
-	        FileUtils.copyFile(screenshotData, screenshotFile);
-	        return path;
-	    } catch (IOException e) {
-	        System.err.println("Error taking screenshot: " + e.getMessage());
-	        return null;
-	    }
+		TakesScreenshot screenshot=(TakesScreenshot)driver.get();
+		
+		File screenshotData=screenshot.getScreenshotAs(OutputType.FILE);
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("HH-mm-ss");
+		String timeStamp = format.format(date);
+		String path ="./screenshots/"+name + " - "+ timeStamp + ".png";
+		File screenshotFile = new File(path);
+		try {
+			FileUtils.copyFile(screenshotData, screenshotFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return path;
 	}
 	
-//	public String takeScreenShot(String name) {
-//		TakesScreenshot screenshot=(TakesScreenshot)driver;
-//		
-//		File screenshotData=screenshot.getScreenshotAs(OutputType.FILE);
-//		Date date = new Date();
-//		SimpleDateFormat format = new SimpleDateFormat("HH-mm-ss");
-//		String timeStamp = format.format(date);
-//		String path =System.getProperty("user.dir")+"screenshots"+name + " - "+ timeStamp + ".png";
-//		File screenshotFile = new File(path);
-//		try {
-//			FileUtils.copyFile(screenshotData, screenshotFile);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return path;
-//	}
+	public void quit() {
+		driver.get().quit();
+	}
 
 }

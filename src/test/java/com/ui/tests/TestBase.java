@@ -2,6 +2,8 @@ package com.ui.tests;
 
 import static com.constants.Browser.CHROME;
 
+import java.sql.Driver;
+
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
